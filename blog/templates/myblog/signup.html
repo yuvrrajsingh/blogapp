@@ -1,0 +1,27 @@
+{% extends 'myblog/base.html' %}
+{% load static %}
+{% block content %}
+<div class="col-sm-5">
+    <h3 class="test-white my-5"> Become an Author </h3>
+    {% if messages %}
+    {% for message in messages %}
+    <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5 {% endif %}">{{message}}</p>
+    {% endfor %}
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p>{{error}}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="" >{% csrf_token %}
+        {% for fm in form %}
+            {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+        {% endfor %}
+        <input type="submit" value="Submit" class="btn btn-primary my-1">
+
+    </form>
+</div>
+
+{% endblock content %}
