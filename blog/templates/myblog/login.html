@@ -2,13 +2,13 @@
 {% load static %}
 {% block content %}
 <div class="col-sm-10">
-    <h3 class="test-white my-5">Login Here</h3>
+    <h3 class="test-white my-5 offset-sm-1">Login Here</h3>
     {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
             <p class="alert alert-danger my-3">{{error}}</p>
         {% endfor %}
     {% endif %}
-    <div class="col-sm-5">
+    <div class="col-sm-5 shadow p-3 offset-sm-1">
     <form method="POST" action="" novalidate>{% csrf_token %}
         {% for fm in form %}
         {{fm.label_tag}} {{fm}} <small class="text-warning my-3">{{fm.errors|striptags}}</small><br>

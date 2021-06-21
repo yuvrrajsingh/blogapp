@@ -65,8 +65,11 @@ def user_login(request):
                 user = authenticate(username=uname, password=upass)
                 if user is not None:
                     login(request, user)
-                    messages.success(request, 'Logged in Successfully!')
-                    return HttpResponseRedirect('/dashboard/')
+                    if request.user.is_superuser:
+                        return HttpResponseRedirect('/admin/')
+                    else:
+                        messages.success(request, 'Logged in Successfully!')
+                        return HttpResponseRedirect('/dashboard/')
         else:
             form = LoginForm()
         return render(request, 'myblog/login.html', {'form':form})
